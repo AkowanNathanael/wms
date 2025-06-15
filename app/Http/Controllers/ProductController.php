@@ -45,12 +45,12 @@ class ProductController extends Controller
         // dd($request->file("image")->store("product", "public"));
         $validated = $request->validate([
             "name" => ["required"],
-            "description" => ["required"],
+            "description" => ["nullable"],
             "brand_id" => ["required"],
             "category_id" => ["required"],
             "warehouse_id" => ["required"],
-            "manufactury_date" => ["required","date"],
-            "expiry_date" => ["required"],
+            "manufactury_date" => ["date","nullable"],
+            "expiry_date" => ["date", "nullable"],
             "username" => ["required"],
             "quantity_in_stock" => ["required"],
             "unit_price" => ["required"],

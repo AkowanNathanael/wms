@@ -1,6 +1,5 @@
 <!doctype html>
-<x-header title="all category" />
-
+<x-header title="all recived incoming goods" />
 <body>
     <!-- Layout wrapper -->
     <div id="top" class="layout-wrapper layout-content-navbar">
@@ -25,33 +24,42 @@
                                 <div class="card h-100">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="card-title mb-0">
-                                            <h5 class="mb-1 me-2">all post</h5>
+                                            <h5 class="mb-1 me-2">all received incoming goods</h5>
                                         </div>
                                         @if ( session("message"))
-                                            <x-message message="{{ session('message') }}" alert="alert-success" />
-                                        
+                                        <x-message message="{{ session('message') }}" alert="alert-success" />
+
                                         @elseif (session("delete"))
-                                             <x-message message="{{ session('delete') }}" alert="alert-danger" />
+                                        <x-message message="{{ session('delete') }}" alert="alert-danger" />
                                         @elseif (session("update"))
-                                             <x-message message="{{ session('update') }}" alert="alert-success" />
+                                        <x-message message="{{ session('update') }}" alert="alert-success" />
                                         @endif
 
                                     </div>
                                     <div class="card-body">
-                                        {{--  --}}
+                                        {{-- --}}
 
                                         <div class="dt-layout-row dt-layout-table">
                                             <div class="dt-layout-cell table-responsive  dt-layout-full">
                                                 <table id="basic" class="table dataTable border "
                                                     aria-describedby="basic_info" style="width: 100%;">
-                                            
+
                                                     <thead>
                                                         <tr>
                                                             <th data-dt-column="0" rowspan="1" colspan="1"
                                                                 class="dt-orderable-asc dt-orderable-desc dt-ordering-asc"
-                                                                aria-sort="ascending">Name</th>
+                                                                aria-sort="ascending">Product</th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
-                                                                class="dt-orderable-asc dt-orderable-desc">Description
+                                                                class="dt-orderable-asc dt-orderable-desc">supplier
+                                                            </th>
+                                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                                class="dt-orderable-asc dt-orderable-desc">selling price
+                                                            </th>
+                                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                                class="dt-orderable-asc dt-orderable-desc">total price
+                                                            </th>
+                                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                                class="dt-orderable-asc dt-orderable-desc">status
                                                             </th>
 
                                                             <th data-dt-column="4" rowspan="1" colspan="1"
@@ -60,22 +68,18 @@
                                                                     class="dt-column-order" role="button"
                                                                     aria-label="Actions: Activate to sort"
                                                                     tabindex="0"></span></th>
-                                                             <th data-dt-column="1" rowspan="1" colspan="1"
-                                                                class="dt-orderable-asc dt-orderable-desc">Add question
-                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="table-border-bottom-0">
-                                                        @foreach ($quizzes as $quiz )
-                                                            <tr>
-                                                            <td class="sorting_1">
-                                                                {{-- <i
-                                                                    class="icon-base bx bxl-angular icon-md text-danger me-4"></i> --}}
-                                                                <span>{{ $quiz->title }}</span>
-                                                            </td>
-                                                            <td> {{  Str::words( $quiz->description,15, '...') }}</td>
-                                                            </td>
-                                                            <td>
+                                                        @foreach ($incomings as $incoming )
+                                                        <tr>
+                                                            <td class=""><span>{{ $incoming->product->name }}</span></td>
+                                                            <td> {{ $incoming->supplier->name  }}</td>
+                                                            <td> {{ $incoming->price   }} GHS</td>
+                                                            <td> {{ $incoming->total   }} GHS</td>
+                                                            <td> <a href="/admin/incoming/{{ $incoming->product->id}}/receive/{{$incoming->id }}">Received goods </a> </td>
+                                                            <
+                                                                <td>
                                                                 <div class="dropdown">
                                                                     <button id="option" type="button" disabled="disabled"
                                                                         class="btn p-0 option dropdown-toggle hide-arrow"
@@ -84,34 +88,27 @@
                                                                             class="icon-base bx bx-dots-vertical-rounded"></i>
                                                                     </button>
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item"
-                                                                            href="/admin/post/{{$post->id }}/edit"><i
-                                                                                class="icon-base bx bx-edit-alt me-1"></i>
-                                                                            Edit</a>
-                                                                        <form action="/admin/post/{{$post->id }}" method="post">
+                                                    
+                                                                        <form action="/admin/incoming/{{$incoming->id }}" method="post">
                                                                             @csrf
                                                                             @method("delete")
-                                                                            <button id="delete" type="submit" class="dropdown-item" 
-                                                                            ><i
-                                                                                class="icon-base bx bx-trash me-1"></i>
-                                                                            Delete</button>
+                                                                            <button id="delete" type="submit" class="dropdown-item"><i
+                                                                                    class="icon-base bx bx-trash me-1"></i>
+                                                                                Delete</button>
                                                                         </form>
 
-                                                                            <a class="dropdown-item"
-                                                                            href="/admin/post/{{ $post->id }}"><i
+                                                                        <a class="dropdown-item"
+                                                                            href="/admin/incoming/{{ $incoming->id }}"><i
                                                                                 class="icon-base bx bx-calendar me-1"></i>
                                                                             view</a>
                                                                     </div>
                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                <a href="/admn/add-question/{{  }}" target="_blank" rel="noopener noreferrer"></a>
-                                                            </td>
+                                                                </td>
                                                         </tr>
                                                         @endforeach
-                                                        
+
                                                     </tbody>
-                                                    <tfoot></tfoot>
+                                                    <tfoot> footer</tfoot>
                                                 </table>
                                             </div>
                                         </div>
@@ -148,37 +145,37 @@
     <!-- Core JS -->
     <x-scripts />
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var els = document.querySelectorAll(".option");
-    els.forEach(element => {
-        element.disabled = "";
-    });
-    console.log(els);
+        document.addEventListener("DOMContentLoaded", function() {
+            var els = document.querySelectorAll(".option");
+            els.forEach(element => {
+                element.disabled = "";
+            });
+            console.log(els);
 
-    new DataTable("#basic");
+            new DataTable("#basic");
 
-    const deleteButtons = document.querySelectorAll("#delete"); // Select all delete buttons
-    deleteButtons.forEach(deleteButton => {
-        deleteButton.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent the default form submission
-            const form = e.target.closest("form"); // Get the closest parent form
-            swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); // Submit the form programmatically
-                }
+            const deleteButtons = document.querySelectorAll("#delete"); // Select all delete buttons
+            deleteButtons.forEach(deleteButton => {
+                deleteButton.addEventListener("click", function(e) {
+                    e.preventDefault(); // Prevent the default form submission
+                    const form = e.target.closest("form"); // Get the closest parent form
+                    swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Submit the form programmatically
+                        }
+                    });
+                });
             });
         });
-    });
-});
-</script>
+    </script>
     {{-- core js end  --}}
 </body>
 

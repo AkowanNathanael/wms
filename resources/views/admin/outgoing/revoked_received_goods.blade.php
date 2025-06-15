@@ -1,5 +1,5 @@
 <!doctype html>
-<x-header title="all events" />
+<x-header title="all revoked outgoing goods" />
 
 <body>
     <!-- Layout wrapper -->
@@ -25,19 +25,20 @@
                                 <div class="card h-100">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="card-title mb-0">
-                                            <h5 class="mb-1 me-2">all resources</h5>
+                                            <h5 class="mb-1 me-2">all revoked outgoing goods</h5>
                                         </div>
-                                        @if (session('message'))
-                                            <x-message message="{{ session('message') }}" alert="alert-success" />
-                                        @elseif (session('delete'))
-                                            <x-message message="{{ session('delete') }}" alert="alert-danger" />
-                                        @elseif (session('update'))
-                                            <x-message message="{{ session('update') }}" alert="alert-success" />
+                                        @if ( session("message"))
+                                        <x-message message="{{ session('message') }}" alert="alert-success" />
+
+                                        @elseif (session("delete"))
+                                        <x-message message="{{ session('delete') }}" alert="alert-danger" />
+                                        @elseif (session("update"))
+                                        <x-message message="{{ session('update') }}" alert="alert-success" />
                                         @endif
 
                                     </div>
                                     <div class="card-body">
-                                        {{--  --}}
+                                        {{-- --}}
 
                                         <div class="dt-layout-row dt-layout-table">
                                             <div class="dt-layout-cell table-responsive  dt-layout-full">
@@ -48,15 +49,18 @@
                                                         <tr>
                                                             <th data-dt-column="0" rowspan="1" colspan="1"
                                                                 class="dt-orderable-asc dt-orderable-desc dt-ordering-asc"
-                                                                aria-sort="ascending">Title</th>
+                                                                aria-sort="ascending">Product</th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
-                                                                class="dt-orderable-asc dt-orderable-desc">Description
+                                                                class="dt-orderable-asc dt-orderable-desc">Customer
                                                             </th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
-                                                                class="dt-orderable-asc dt-orderable-desc">file
+                                                                class="dt-orderable-asc dt-orderable-desc">selling price
                                                             </th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
-                                                                class="dt-orderable-asc dt-orderable-desc"> Type
+                                                                class="dt-orderable-asc dt-orderable-desc">total price
+                                                            </th>
+                                                            <th data-dt-column="1" rowspan="1" colspan="1"
+                                                                class="dt-orderable-asc dt-orderable-desc"> status
                                                             </th>
 
                                                             <th data-dt-column="4" rowspan="1" colspan="1"
@@ -68,54 +72,44 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="table-border-bottom-0">
-                                                        @foreach ($resources as $resource)
-                                                            <tr>
-                                                                <td class="sorting_1">
-                                                                    <i
-                                                                        class="icon-base bx bxl-angular icon-md text-danger me-4"></i>
-                                                                    <span>{{ $resource->title }}</span>
-                                                                </td>
-                                                                <td> {{ Str::words($resource->description, 15, '...') }}
-                                                                </td>
-                                                                <td> {{ $resource->type }} </td>
-                                                                <td> {{ $resource->url }}</td>
+                                                        @foreach ($outgoings as $outgoing )
+                                                        <tr>
+                                                            <td class=""><span>{{ $outgoing->product->name }}</span></td>
+                                                            <td> {{ $outgoing->customer->name  }}</td>
+                                                            <td> {{ $outgoing->price   }} GHS</td>
+                                                            <td> {{ $outgoing->total   }} GHS</td>
+                                                            <td> <a href="/admin/outgoing/{{ $outgoing->id }}/receive/{{ $outgoing->product->id }}">Revoke goods </a> </td>
+                                                            <
                                                                 <td>
-                                                                    <div class="dropdown">
-                                                                        <button id="option" type="button"
-                                                                            disabled="disabled"
-                                                                            class="btn p-0 option dropdown-toggle hide-arrow"
-                                                                            data-bs-toggle="dropdown">
-                                                                            <i
-                                                                                class="icon-base bx bx-dots-vertical-rounded"></i>
-                                                                        </button>
-                                                                        <div class="dropdown-menu">
-                                                                            <a class="dropdown-item"
-                                                                                href="/admin/resource/{{ $resource->id }}/edit"><i
-                                                                                    class="icon-base bx bx-edit-alt me-1"></i>
-                                                                                Edit</a>
-                                                                            <form
-                                                                                action="/admin/resource/{{ $resource->id }}"
-                                                                                method="post">
-                                                                                @csrf
-                                                                                @method('delete')
-                                                                                <button id="delete" type="submit"
-                                                                                    class="dropdown-item"><i
-                                                                                        class="icon-base bx bx-trash me-1"></i>
-                                                                                    Delete</button>
-                                                                            </form>
+                                                                <div class="dropdown">
+                                                                    <button id="option" type="button" disabled="disabled"
+                                                                        class="btn p-0 option dropdown-toggle hide-arrow"
+                                                                        data-bs-toggle="dropdown">
+                                                                        <i
+                                                                            class="icon-base bx bx-dots-vertical-rounded"></i>
+                                                                            
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <form action="/admin/outgoing/{{$outgoing->id }}" method="post">
+                                                                            @csrf
+                                                                            @method("delete")
+                                                                            <button id="delete" type="submit" class="dropdown-item"><i
+                                                                                    class="icon-base bx bx-trash me-1"></i>
+                                                                                Delete</button>
+                                                                        </form>
 
-                                                                            <a class="dropdown-item"
-                                                                                href="/admin/resource/{{ $resource->id }}"><i
-                                                                                    class="icon-base bx bx-calendar me-1"></i>
-                                                                                view</a>
-                                                                        </div>
+                                                                        <a class="dropdown-item"
+                                                                            href="/admin/outgoing/{{ $outgoing->id }}"><i
+                                                                                class="icon-base bx bx-calendar me-1"></i>
+                                                                            view</a>
                                                                     </div>
+                                                                </div>
                                                                 </td>
-                                                            </tr>
+                                                        </tr>
                                                         @endforeach
 
                                                     </tbody>
-                                                    <tfoot></tfoot>
+                                                    <tfoot> footer</tfoot>
                                                 </table>
                                             </div>
                                         </div>

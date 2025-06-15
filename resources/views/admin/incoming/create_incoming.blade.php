@@ -33,26 +33,25 @@
                                         <form class=" row" enctype="multipart/form-data" action="/admin/incoming/store"
                                             method="post">
                                             @csrf
-
-                                            <div class=" col-lg-5 m-1 border rounded-2 p-1 ">
+                                            <div class=" col-lg-5 m-1  rounded-2 p-1 ">
                                                 <label for="product_id" class="form-label">product</label>
-                                                <select onchange="productSelect(event)" value="{{ old('product_id') }}" id="product_id"
-                                                    name="product_id" class="form-select form-select-sm">
-                                                    <option value="null" selected>--choose--</option>
+                                                <select onchange="productSelect(event)" id="product_id" name="product_id" class="form-select form-select-sm">
+                                                    <option value="">--choose--</option>
                                                     @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}">
-                                                        {{ $product->name }} GHS{{ $product->unit_price }}
-                                                        <input style="opacity:0;color:white;" type="text" name="prod_price" id="prod_price" value="{{$product->unit_price  }}" />
-                                                    </option>
+                                                        <option 
+                                                            value="{{ $product->id }}"
+                                                            data-price="{{ $product->unit_price }}"
+                                                            data-name="{{ $product->name }}"
+                                                        >
+                                                            {{ $product->name }} GHS{{ $product->unit_price }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
-
                                                 @error('product_id')
                                                 <p id="floatingInputHelp" class="form-text text-danger ">
                                                     {{ $message }}
                                                 </p>
                                                 @enderror
-                                                
                                             </div>
                                             <div class="form-floating col-lg-5 m-1">
                                                 <input type="number" class="form-control" value="{{ old('quantity') }}"
@@ -86,7 +85,6 @@
                                                     </option>
                                                     @endforeach
                                                 </select>
-
                                                 @error('supplier_id')
                                                 <p id="floatingInputHelp" class="form-text text-danger ">
                                                     {{ $message }}
@@ -149,7 +147,7 @@
         if (priceEl.value) {
             const mult = Number.parseFloat(priceEl.value) * Number.parseFloat(quantityEl.value)
             console.log(mult)
-            totalEl.value=mult
+            totalEl.value = mult
         }
 
 

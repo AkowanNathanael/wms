@@ -17,7 +17,7 @@ class IncomingController extends Controller
     public function index()
     {
         //
-        $incomings = Incoming::all();
+        $incomings = Incoming::where("status", 0)->get();
         return view("admin.incoming.index", ["incomings" => $incomings]);
     }
 
@@ -42,15 +42,7 @@ class IncomingController extends Controller
             "product_id" => ["integer", "required"],
             "quantity" => [
                 "required",
-                "numeric",
-                function ($attribute, $value, $fail) use ($request) {
-                    $product = \App\Models\Product::find($request->product_id);
-                    if (!$product) {
-                        $fail('Selected product does not exist.');
-                    } elseif ($value > $product->quantity_in_stock) {
-                        $fail('Requested quantity exceeds available stock (' . $product->quantity_in_stock . ').');
-                    }
-                }
+                "numeric"              
             ],
             "price" => ["required"],
             "supplier_id" => ["required"],
@@ -59,7 +51,7 @@ class IncomingController extends Controller
         ]);
         // dd($validated); 
         $incoming = Incoming::create($validated);
-        return redirect("admin/incoming/create")->with("success", "Incoming record created successfully");
+        return redirect("admin/incoming")->with("success", "Incoming record created successfully");
     }
 
     /**
@@ -76,7 +68,6 @@ class IncomingController extends Controller
      */
     public function edit(Incoming $incoming)
     {
-        //
         $products = Product::all();
         $suppliers = Supplier::all();
         return view("admin.incoming.edit", [
@@ -123,5 +114,20 @@ class IncomingController extends Controller
         $incoming->delete();
         return redirect("admin/incoming")->with("success", "Incoming record deleted successfully");
     }
-    public function receiveGoods(Request $request, Incoming $incoming) {}
+
+    public function receiveGoods(Product $product, Incoming $incoming) {
+    // dd($product);
+        // dd($incoming);
+        $product->quantity_in_stock += $incoming->quantity;
+        $product->save();
+        $incoming->status = 1; // Mark as received
+        $incoming->save();
+        return redirect("admin/incoming")->with("success", "Goods received successfully");
+         
+    }
+    public function processGoods() {
+        $incomings = Incoming::where("status", 1)->get();
+        return view("admin.incoming.received_goods", ["incomings" => $incomings]);
+    }
+
 }

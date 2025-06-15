@@ -34,7 +34,5 @@ class DatabaseSeeder extends Seeder
             'isadmin' => 0
         ]);
         Category::factory(10)->create();
-        Post::factory(10)->create();
-        Event::factory(5)->create();
     }
 }

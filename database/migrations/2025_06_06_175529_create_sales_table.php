@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string("product_name");
-            $table->foreignId("product_id")->constrained();
-            $table->string("qty");
-            $table->string("total_price");
+            // $table->string("product_names");
+            $table->foreignId("customer_id")->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->decimal("total_price");
+            $table->string("invoice_id");
+            $table->string("invoice")->nullable();
             $table->enum("payment_type",["card","cheque","cash","momo"]);
             $table->timestamps();
         });

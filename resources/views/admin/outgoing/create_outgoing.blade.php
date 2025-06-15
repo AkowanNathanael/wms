@@ -35,15 +35,18 @@
                                             @csrf
 
                                             <div class=" col-lg-5 m-1 border rounded-2 p-1 ">
+                                                
                                                 <label for="product_id" class="form-label">product</label>
-                                                <select onchange="productSelect(event)" value="{{ old('product_id') }}" id="product_id"
-                                                    name="product_id" class="form-select form-select-sm">
-                                                    <option value="null" selected>--choose--</option>
+                                                <select onchange="productSelect(event)" id="product_id" name="product_id" class="form-select form-select-sm">
+                                                    <option value="">--choose--</option>
                                                     @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}">
-                                                        {{ $product->name }} GHS{{ $product->unit_price }}
-                                                        <input style="opacity:0;color:white;" type="text" name="prod_price" id="prod_price" value="{{$product->unit_price  }}" />
-                                                    </option>
+                                                        <option 
+                                                            value="{{ $product->id }}"
+                                                            data-price="{{ $product->unit_price }}"
+                                                            data-name="{{ $product->name }}"
+                                                        >
+                                                            {{ $product->name }} GHS{{ $product->unit_price }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
 

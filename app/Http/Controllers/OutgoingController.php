@@ -18,7 +18,7 @@ class OutgoingController extends Controller
     public function index()
     {
         //
-        $outgoings = Outgoing::all();
+        $outgoings = Outgoing::where("status", 0)->get();
         return view("admin.outgoing.index", ["outgoings" => $outgoings]);
     }
 
@@ -68,7 +68,7 @@ class OutgoingController extends Controller
         } else {
             return redirect()->back()->withErrors(['product_id' => 'Selected product does not exist.']);
         }
-        return redirect("admin/outgoing/create")->with("success", "outgoing record created successfully");
+        return redirect("admin/outgoing")->with("success", "outgoing record created successfully");
     }
 
     /**
@@ -134,15 +134,21 @@ class OutgoingController extends Controller
     }
     public function receiveGoods(Product $product, Outgoing $outgoing) {
         // Validate the request data
-        dd($product);
-        dd($outgoing);
+        // dd($product);
+        // dd($outgoing);
         $product->quantity_in_stock += $outgoing->quantity_received;
         $product->save();
         // Validate the quantity received
         // Update the outgoing record with the received quantity
-        $outgoing->quantity_received = $validated['quantity_received'];
+        // $outgoing->quantity_received = $validated['quantity_received'];
+        $outgoing->status=1;
         $outgoing->save();
-        $outgoing->delete();
+        // $outgoing->delete();
         return redirect("admin/outgoing")->with('success', 'Goods received successfully.');
+    }
+    public function revoked_received_goods()
+    {
+        $outgoings = Outgoing::where("status", 1)->get();
+        return view("admin.outgoing.revoked_received_goods", ["outgoings" => $outgoings]);
     }
 }

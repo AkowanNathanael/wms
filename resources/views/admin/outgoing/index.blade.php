@@ -54,6 +54,9 @@
                                                                 class="dt-orderable-asc dt-orderable-desc">Customer
                                                             </th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
+                                                                class="dt-orderable-asc dt-orderable-desc">qty
+                                                            </th>
+                                                            <th data-dt-column="1" rowspan="1" colspan="1"
                                                                 class="dt-orderable-asc dt-orderable-desc">selling price
                                                             </th>
                                                             <th data-dt-column="1" rowspan="1" colspan="1"
@@ -76,6 +79,7 @@
                                                         <tr>
                                                             <td class=""><span>{{ $outgoing->product->name }}</span></td>
                                                             <td> {{ $outgoing->customer->name  }}</td>
+                                                            <td> {{ $outgoing->quantity  }}</td>
                                                             <td> {{ $outgoing->price   }} GHS</td>
                                                             <td> {{ $outgoing->total   }} GHS</td>
                                                             <td> <a href="/admin/outgoing/{{ $outgoing->id }}/receive/{{ $outgoing->product->id }}">Revoke goods </a> </td>

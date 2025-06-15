@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('business_name')->default("my business");
             $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->enum("role",["admin","staff","manager"])->default("staff");
