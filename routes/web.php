@@ -203,6 +203,7 @@ Route::post("/login/auth", [Authentication::class, "login"]);
 Route::post("/register/auth", [Authentication::class, "register"]);
 //
 
+Route::redirect("/","/login");
 //
 // Route::get('/', function () {
 //     return view("admin.index");
