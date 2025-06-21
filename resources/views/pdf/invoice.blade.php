@@ -91,7 +91,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="company-name">Your Company Name</div>
+            <div class="company-name"> Company Name: Akurugu wms </div>
             <div class="company-details">123 Business Street, City, Country</div>
             <div class="company-details">Phone: +1 234 567 890 | Email: info@yourcompany.com</div>
             <div class="company-details">VAT: 123456789</div>
