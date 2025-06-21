@@ -119,7 +119,7 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-1">Welcome to cybersecurity awareness! 👋</h4>
+              <h4 class="mb-1">Welcome to Akurugu wms 👋</h4>
               <p class="mb-6">Please sign-in to your account and start the adventure</p>
 
               <form id="formAuthentication" class="mb-6" method="post" action="/login/auth">
@@ -175,12 +175,12 @@
                 </div>
               </form>
 
-              <p class="text-center">
+              <!-- <p class="text-center">
                 <span>New on our platform?</span>
                 <a href="/register">
                   <span>Create an account</span>
                 </a>
-              </p>
+              </p> -->
             </div>
           </div>
           <!-- /Register -->
