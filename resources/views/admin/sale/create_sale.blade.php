@@ -1,5 +1,6 @@
 <!doctype html>
 <x-header title="add Sales" />
+
 <body>
     <!-- Layout wrapper -->
     <div id="top" class="layout-wrapper layout-content-navbar">
@@ -78,7 +79,7 @@
                                         </form>
                                     </div> -->
                                     <div class="card-body p-2 m-1 ">
-                                        <form class="row" id="posForm" method="POST" action="/admin/invoice">
+                                        <form class="row" id="posForm" method="POST" action="/admin/invoice?random={{ rand(1000, 9999) }}">
                                             @csrf
                                             <div class="col-lg-5">
                                                 <label>Customer Name:</label>
@@ -248,8 +249,8 @@
         });
 
         document.getElementById('posForm').addEventListener('submit', function(e) {
+            console.log('Form submit event triggered!');
             e.preventDefault(); // Prevent default submission
-
             if (!selectedCustomerId || cart.length === 0) {
                 alert("Please select a customer and add at least one product to the cart.");
                 return;
@@ -257,9 +258,9 @@
 
             // Set the cart data before submission
             document.getElementById('cart').value = JSON.stringify(cart);
-            
+
             // Submit the form
-            this.submit();
+            this.submit(); // Remove this line
         });
 
     });

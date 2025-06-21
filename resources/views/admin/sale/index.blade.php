@@ -84,7 +84,7 @@
                                                             <td class=""><span>{{ $sale->invoice_id }}</span></td>
                                                             <td> {{ $sale->customer ->name }}</td>
                                                             <td> GHC {{ $sale->total_price   }}</td>
-                                                            <td> <a href="{{ asset('$sale->invoice') }}" target="_blank">view invoice</a> {{ $sale->unit_price   }}</td>
+                                                            <td> <a href="{{ asset($sale->invoice) }}" target="_blank">view invoice</a> {{ $sale->unit_price   }}</td>
                                                             <!-- <td> {{ $sale->expiry_date   }}</td> -->
                                                             <td> {{ $sale->payment_type   }}</td>
                                                             <td> {{ $sale->created_at   }}</td>

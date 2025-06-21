@@ -56,7 +56,7 @@
 
                                     </div>
                                     <div class="card-body row">
-                                        <div class="card  col-lg-3 m-1 shadow shadow-primary">
+                                        <div class="card bg-secondary col-lg-3 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -71,7 +71,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div class="card bg-danger col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -86,7 +86,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div class="card bg-warning col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -101,7 +101,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div class="card bg-success col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -116,7 +116,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-3 m-1 shadow shadow-primary">
+                                        <div class="card bg-primary col-lg-3 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -131,7 +131,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div class="card bg-info  col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -146,7 +146,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div class="card bg-light col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -161,7 +161,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-4 m-1 shadow shadow-primary">
+                                        <div style="background-color: #fd7e14;" class="card   col-lg-4 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -176,7 +176,7 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
-                                        <div class="card  col-lg-3 m-1 shadow shadow-primary">
+                                        <div style="background-color: #d63384;" class="card   col-lg-3 m-1 shadow shadow-primary">
                                             <div class="card-body">
                                                 <div
                                                     class="card-title d-flex align-items-start justify-content-between mb-4">
@@ -191,10 +191,66 @@
                                                         class="icon-base bx bx-up-arrow-alt"></i> </small> --}}
                                             </div>
                                         </div>
+                                        <!-- Total Sales Card -->
+                                        <div style="background-color: #20c997;" class="card col-lg-4 m-1 shadow shadow-primary">
+                                            <div class="card-body">
+                                                <div
+                                                    class="card-title d-flex align-items-start justify-content-between mb-4">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <img src="{{ asset('dist/img/icons/unicons/wallet-info.png') }}"
+                                                            alt="Total Sales" class="rounded">
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1">Total Sales</p>
+                                                <h4 class="card-title mb-3">{{ $totalSales }}</h4>
+                                            </div>
+                                        </div>
+
+                                        <div style="background-color: #ffc107;" class="card col-lg-4 m-1 shadow shadow-warning">
+                                            <div class="card-body">
+                                                <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <img src="{{ asset('dist/img/icons/unicons/wallet-info.png') }}"
+                                                            alt="pending incoming" class="rounded">
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1">Pending Incoming Goods</p>
+                                                <h4 class="card-title mb-3">{{ $pendingIncoming }}</h4>
+                                            </div>
+                                        </div>
+
+                                        <div style="background-color: #0dcaf0;" class="card col-lg-4 m-1 shadow shadow-warning">
+                                            <div class="card-body">
+                                                <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <img src="{{ asset('dist/img/icons/unicons/wallet-info.png') }}"
+                                                            alt="pending outgoing" class="rounded">
+                                                    </div>
+                                                </div>
+                                                <p class="mb-1">Pending Outgoing Goods</p>
+                                                <h4 class="card-title mb-3">{{ $pendingOutgoing }}</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!--/ Order Statistics -->
+                        </div>
+                        <div class="row">
+                            <!-- Sales by Date Chart -->
+                            <div class="col-md-6 col-lg-12 col-xl-12 order-0 mb-4">
+                                <div class="card   h-100">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <div class="card-title mb-0">
+                                            <h5 class="mb-1 me-2">Sales by Date</h5>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="salesByDateChart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ Sales by Date Chart -->
                         </div>
                         @else
                         <div class="row">
@@ -235,131 +291,256 @@
             // CSA
             // ------------------------------------------
             // --------------------------------------------------------------------
-            const csaChartEl = document.querySelector("#csa"),
-                csaChartConfig = {
-                    series: [{
-                        data: [{
-                                {
-                                    $categories
-                                }
-                            }, {
-                                {
-                                    $products
-                                }
-                            }, {
-                                {
-                                    $suppliers
-                                }
-                            },
-                            {
-                                {
-                                    $warehouses
-                                }
-                            }, {
-                                {
-                                    $brands
-                                }
-                            }, {
-                                {
-                                    $sales
-                                }
-                            },
-                            {
-                                {
-                                    $customers
-                                }
-                            }
-                        ],
+            const csaChartEl = document.querySelector("#csa");
+            const csaChartConfig = {
+                series: [{
+                    data: [
+                        "{{ $categories }}",
+                        "{{ $products }}",
+                        "{{ $suppliers }}",
+                        "{{ $warehouses }}",
+                        "{{ $brands }}",
+                        "{{ $sales }}",
+                        "{{ $customers }}"
+                    ],
+                }, ],
+                chart: {
+                    height: 200,
+                    parentHeightOffset: 0,
+                    parentWidthOffset: 0,
+                    toolbar: {
+                        show: false,
+                    },
+                    type: "area",
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    width: 3,
+                    curve: "smooth",
+                },
+                legend: {
+                    show: true,
+                },
+                markers: {
+                    size: 6,
+                    colors: "transparent",
+                    strokeColors: "transparent",
+                    strokeWidth: 4,
+                    discrete: [{
+                        fillColor: config.colors.white,
+                        seriesIndex: 0,
+                        dataPointIndex: 6,
+                        strokeColor: config.colors.primary,
+                        strokeWidth: 2,
+                        size: 6,
+                        radius: 8,
                     }, ],
-                    chart: {
-                        height: 200,
-                        parentHeightOffset: 0,
-                        parentWidthOffset: 0,
-                        toolbar: {
-                            show: false,
+                    offsetX: -1,
+                    hover: {
+                        size: 7,
+                    },
+                },
+                colors: [config.colors.primary],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.3,
+                        gradientToColors: [config.colors.cardColor],
+                        opacityTo: 0.3,
+                        stops: [0, 100],
+                    },
+                },
+                grid: {
+                    // borderColor: borderColor,
+                    strokeDashArray: 8,
+                    padding: {
+                        top: -20,
+                        bottom: -8,
+                        left: 0,
+                        right: 8,
+                    },
+                },
+                xaxis: {
+                    categories: ["categories", "products", "suppliers", "warehouses", "brands", "sales",
+                        "customers"
+                    ],
+                    axisBorder: {
+                        show: false,
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: true,
+                        style: {
+                            fontSize: "13px",
+                            // colors: labelColor,
                         },
-                        type: "area",
                     },
-                    dataLabels: {
-                        enabled: false,
-                    },
-                    stroke: {
-                        width: 3,
-                        curve: "smooth",
-                    },
-                    legend: {
+                },
+                yaxis: {
+                    labels: {
                         show: true,
                     },
-                    markers: {
-                        size: 6,
-                        colors: "transparent",
-                        strokeColors: "transparent",
-                        strokeWidth: 4,
-                        discrete: [{
-                            fillColor: config.colors.white,
-                            seriesIndex: 0,
-                            dataPointIndex: 6,
-                            strokeColor: config.colors.primary,
-                            strokeWidth: 2,
-                            size: 6,
-                            radius: 8,
-                        }, ],
-                        offsetX: -1,
-                        hover: {
-                            size: 7,
-                        },
-                    },
-                    colors: [config.colors.primary],
-                    fill: {
-                        type: "gradient",
-                        gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            gradientToColors: [config.colors.cardColor],
-                            opacityTo: 0.3,
-                            stops: [0, 100],
-                        },
-                    },
-                    grid: {
-                        // borderColor: borderColor,
-                        strokeDashArray: 8,
-                        padding: {
-                            top: -20,
-                            bottom: -8,
-                            left: 0,
-                            right: 8,
-                        },
-                    },
-                    xaxis: {
-                        categories: ["categories", "events", "podcasts", "posts", "quizzes", "resources",
-                            "services"
-                        ],
-                        axisBorder: {
-                            show: false,
-                        },
-                        axisTicks: {
-                            show: false,
-                        },
-                        labels: {
-                            show: true,
-                            style: {
-                                fontSize: "13px",
-                                // colors: labelColor,
-                            },
-                        },
-                    },
-                    yaxis: {
-                        labels: {
-                            show: true,
-                        },
-                        min: 0,
-                        max: 50,
-                        tickAmount: 4,
-                    },
-                };
+                    min: 0,
+                    max: 50,
+                    tickAmount: 4,
+                },
+            };
             if (typeof csaChartEl !== undefined && csaChartEl !== null) {
                 const csaChart = new ApexCharts(csaChartEl, csaChartConfig);
                 csaChart.render();
+            }
+            // Sales by Date Chart
+            // --------------------------------------------------------------------
+            // const salesByDateChartEl = document.querySelector("#salesByDateChart");
+            // const salesByDateChartConfig = {
+            //     series: [{
+            //         name: "Sales",
+            //         data: [{
+            //             !!json_encode($salesData) !!
+            //         }], // Pass sales data from controller
+            //         // data: [{{ json_encode($salesData) }}],
+            //         // data: [JSON.parse(`{{json_encode($salesData) }}`)], // Pass sales data from controller
+            //     }, ],
+            //     chart: {
+            //         height: 350,
+            //         type: "line",
+            //         toolbar: {
+            //             show: false,
+            //         },
+            //     },
+            //     plotOptions: {
+            //         bar: {
+            //             borderRadius: 10,
+            //             dataLabels: {
+            //                 position: "top", // top, center, bottom
+            //             },
+            //         }
+            //     },
+            //     dataLabels: {
+            //         enabled: false,
+            //         formatter: function(val) {
+            //             return val + "Sales";
+            //         },
+            //         offsetY: -20,
+            //         style: {
+            //             fontSize: "12px",
+            //             colors: ["#304758"]
+            //         }
+            //     },
+
+            //     xaxis: {
+            //         type: 'datetime',
+            //         labels: {
+            //             formatter: function(value, timestamp) {
+            //                 return new Date(timestamp).toLocaleDateString();
+            //             }
+            //         }
+            //     },
+            //     yaxis: {
+            //         title: {
+            //             text: 'Sales Volume',
+            //         },
+            //     },
+            //     fill: {
+            //         type: "gradient",
+            //         gradient: {
+            //             shadeIntensity: 1,
+            //             opacityFrom: 0.7,
+            //             opacityTo: 0.9,
+            //             stops: [0, 90, 100]
+            //         }
+            //     },
+            //     grid: {
+            //         padding: {
+            //             top: -20,
+            //             bottom: -8,
+            //             left: 5,
+            //             right: 5,
+            //         },
+            //     },
+            // };
+            // if (typeof salesByDateChartEl !== undefined && salesByDateChartEl !== null) {
+            //     const salesByDateChart = new ApexCharts(salesByDateChartEl, salesByDateChartConfig);
+            //     salesByDateChart.render();
+            // }
+            // Sales by Date Chart
+            const salesChartEl = document.getElementById('salesByDateChart');
+            if (salesChartEl) {
+                // Get the sales data passed from Laravel
+                const salesData = @json($salesData);
+
+                // Format dates properly
+                const formattedData = salesData.map(item => {
+                    return {
+                        x: new Date(item.x).getTime(), // Convert to timestamp
+                        y: item.y
+                    };
+                });
+
+                const options = {
+                    series: [{
+                        name: "Sales",
+                        data: formattedData
+                    }],
+                    chart: {
+                        height: 350,
+                        type: 'line',
+                        zoom: {
+                            enabled: false
+                        },
+                        toolbar: {
+                            show: false
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'straight',
+                        width: 2
+                    },
+                    title: {
+                        text: 'Sales Over Time',
+                        align: 'left'
+                    },
+                    grid: {
+                        row: {
+                            colors: ['#f3f3f3', 'transparent'],
+                            opacity: 0.5
+                        }
+                    },
+                    xaxis: {
+                        type: 'datetime',
+                        labels: {
+                            formatter: function(value) {
+                                return new Date(value).toLocaleDateString();
+                            }
+                        }
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'Sales Amount'
+                        },
+                        labels: {
+                            formatter: function(value) {
+                                return 'GHC' + value.toFixed(2);
+                            }
+                        }
+                    },
+                    tooltip: {
+                        x: {
+                            format: 'dd MMM yyyy'
+                        }
+                    }
+                };
+
+                const chart = new ApexCharts(salesChartEl, options);
+                chart.render();
             }
         })
     </script>

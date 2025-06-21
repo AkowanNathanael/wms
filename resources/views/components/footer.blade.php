@@ -8,7 +8,7 @@
                     document.write(new Date().getFullYear());
                 </script>
                 , made with ❤️ by
-                <a href="#" target="_blank" class="footer-link">CyberSecurity Awareness</a>
+                <a href="#" target="_blank" class="footer-link">warehouse management system</a>
             </div>
             <div class="d-none d-lg-inline-block">
                 <a href="/" target="_blank"
@@ -22,7 +22,7 @@
                     target="_blank" class="footer-link me-4">Documentation</a> --}}
 
                 <a href="#"
-                    target="_blank" class="footer-link">Powered by CKT-UTAS</a>
+                    target="_blank" class="footer-link">Powered by NLC</a>
             </div>
         </div>
     </div>

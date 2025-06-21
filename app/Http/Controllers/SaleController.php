@@ -146,9 +146,16 @@ class SaleController extends Controller
         return redirect("/admin/product")->with(["delete" => "product deleted"]);
         // dd($post);
     }
-
+    private static $invoiceCalled = false;
     public function invoice(Request $request)
     {
+        if (self::$invoiceCalled) {
+            Log::warning('Invoice method called multiple times in short succession.  Possible duplicate submission.');
+            return back()->with('error', 'Possible duplicate submission. Please try again.');
+        }
+
+        self::$invoiceCalled = true;
+        Log::info('Invoice method called!'); // Add this line
         DB::beginTransaction();
         try {
             $customer = Customer::find($request->customer_id);
@@ -172,7 +179,7 @@ class SaleController extends Controller
 
             // Generate invoice details
             $invoiceNumber = 'INV-' . date('Ymd') . '-' . uniqid();
-            $filename = 'invoice_' . $invoiceNumber . '.pdf';
+            $filename = $customer->name . $invoiceNumber . '.pdf';
             $invoice_id = date('Ymd').rand(1000, 9999);
 
             // Ensure directory exists
@@ -219,7 +226,8 @@ class SaleController extends Controller
             }
 
             DB::commit();
-            return response()->download($publicFilePath)->deleteFileAfterSend(false);
+             return response()->download($publicFilePath)->deleteFileAfterSend(false);
+            // return redirect("/admin/sale");
 
         } catch (\Exception $e) {
             DB::rollBack();

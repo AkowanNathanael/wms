@@ -45,7 +45,29 @@ Route::get("/admin/dashboard",function(){
     $brands=\App\Models\Brand::all()->count();
     $sales=\App\Models\Sale::all()->count();
     $customers=\App\Models\Customer::all()->count();
+    //
+    // $salesData = \App\Models\Sale::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+    //     ->groupBy('date')
+    //     ->orderBy('date')
+    //     ->get()
+    //     ->pluck('count', 'date')
+    //     ->toArray();
+    $salesData = \App\Models\Sale::selectRaw('DATE(created_at) as date, SUM(total_price) as total')
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get()
+        ->map(function ($item) {
+            return [
+                'x' => $item->date,
+                'y' => $item->total
+            ];
+        });
+
+    // $totalSales = \App\Models\Sale::all()->count();
+    $totalSales = \App\Models\Sale::sum('total_price');
     // $questions=\App\Models\Question::all()->count();
+    $pendingIncoming = \App\Models\Incoming::where('status', 0)->count();
+    $pendingOutgoing = \App\Models\Outgoing::where('status', 0)->count();
     $data=[
         "users"=>$users,
         "admins"=>$admins,
@@ -56,12 +78,16 @@ Route::get("/admin/dashboard",function(){
         "brands"=> $brands,
         "sales"=> $sales,
         "customers"=> $customers,
+        "salesData" => $salesData,
+        "totalSales" => $totalSales,
+        "pendingIncoming" => $pendingIncoming,
+        "pendingOutgoing" => $pendingOutgoing
         // "questions"=>$questions
     ];
     // dd($data);
 
   return view("admin.index", $data);
-})->middleware("auth")->name("admin.dashboard");
+})->middleware("auth")->name("home");
 
 Route::middleware("auth")->group(function () {
     //
@@ -71,7 +97,7 @@ Route::middleware("auth")->group(function () {
     //
     Route::post('/admin/invoice', [SaleController::class, 'invoice']);
     Route::get('/admin/sale', [SaleController::class, 'index']);
-    // Route::get('/admin/invoice', [SaleController::class, 'invoice']);
+    Route::get("/admin/sale/create", [SaleController::class, "create"]);
     // 
     Route::get("/admin/category/create", [CategoryController::class, "create"]);
     Route::post("/admin/category/store", [CategoryController::class, "store"]);
@@ -105,8 +131,7 @@ Route::middleware("auth")->group(function () {
     Route::delete("/admin/supplier/{supplier}", [SupplierController::class, "destroy"]);
     Route::get("/admin/supplier/{supplier}/edit", [SupplierController::class, "edit"]);
     //
-    Route::get("/admin/sale/create", [SaleController::class, "create"]);
-    // 
+ 
     Route::get("/admin/warehouse/create", [WarehouseController::class, "create"]);
     Route::post("/admin/warehouse/store", [WarehouseController::class, "store"]);
     Route::get("/admin/warehouse", [WarehouseController::class, "index"]);
@@ -179,9 +204,9 @@ Route::post("/register/auth", [Authentication::class, "register"]);
 //
 
 //
-Route::get('/', function () {
-    return view("admin.index");
-})->name("home");
+// Route::get('/', function () {
+//     return view("admin.index");
+// })->name("home")->middleware("auth");
 
 
 
